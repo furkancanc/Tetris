@@ -2,11 +2,20 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
+   
+
     public Transform emptySprite;
     public int height = 30;
     public int width = 10;
     public int header = 8;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    Transform[,] grid;
+
+    private void Awake()
+    {
+        grid = new Transform[width, height];
+    }
+
     void Start()
     {
         DrawEmptyCells();
