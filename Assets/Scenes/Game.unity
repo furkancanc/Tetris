@@ -2208,6 +2208,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c203061d1a3aa45909cae6a2f545a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allShapes:
+  - {fileID: 6298530301910167613, guid: 8e49c141605713640973c92e51d851cf, type: 3}
+  - {fileID: 1358662027476734514, guid: f8b428fb306634742b2e740297bfb960, type: 3}
+  - {fileID: 3315986482546639968, guid: a0c5d11890c5b2f45816b753eac4ae5f, type: 3}
+  - {fileID: 7298226544288323812, guid: efce8690c93e02749a4a749bead0a52c, type: 3}
+  - {fileID: 8016261439595835220, guid: 0030301461b76764498ec5f8218068cf, type: 3}
+  - {fileID: 3319761282446259858, guid: f8d41c6656b55b54db0002f899aa7568, type: 3}
+  - {fileID: 8016261439595835220, guid: 7ba9dac67c5a06e439abc022ab1794a1, type: 3}
 --- !u!4 &1972200714
 Transform:
   m_ObjectHideFlags: 0
@@ -2217,7 +2225,7 @@ Transform:
   m_GameObject: {fileID: 1972200712}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 25, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
