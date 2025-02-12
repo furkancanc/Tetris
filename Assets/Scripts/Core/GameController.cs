@@ -10,10 +10,13 @@ public class GameController : MonoBehaviour
     float dropInterval = .25f;
     float timeToDrop;
 
+    float timeToNextKey;
+    float keyRepeatRate = .25f;
+
     private void Start()
     {
-        //gameBoard = GameObject.FindWithTag("Board").GetComponent<Board>();
-        //spawner = GameObject.FindWithTag("Spawner").GetComponent<Spawner>();
+        timeToNextKey = Time.time;
+
         gameBoard = GameObject.FindFirstObjectByType<Board>();
         spawner = GameObject.FindFirstObjectByType<Spawner>();
 
@@ -40,9 +43,20 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (!gameBoard || !spawner)
+        if (Input.GetButtonDown("MoveRight") && Time.time > timeToNextKey)
         {
-            return;
+            activeShape.MoveRight();
+            timeToNextKey = Time.time + keyRepeatRate;
+
+            if (gameBoard.IsValidPosition(activeShape))
+            {
+                Debug.Log("Move right");
+            }
+            else
+            {
+                activeShape.MoveLeft();
+                Debug.Log("Hit the right boundary");
+            }
         }
 
         if (Time.time > timeToDrop)
