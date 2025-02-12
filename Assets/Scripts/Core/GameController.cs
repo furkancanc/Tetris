@@ -7,28 +7,37 @@ public class GameController : MonoBehaviour
 
     Shape activeShape;
 
-    float dropInterval = .25f;
+    float dropInterval = .9f;
     float timeToDrop;
 
     float timeToNextKey;
-    float keyRepeatRate = .25f;
+
+    //[Range(.02f, 1f)]
+    //float keyRepeatRate = .03f;
+
+    float timeToNextKeyLeftRight;
+
+    [Range(.02f, 1f)]
+    public float keyRepeatRateLeftRight = .15f;
+
+    float timeToNextKeyDown;
+
+    [Range(.01f, 1f)]
+    public float keyRepeatRateDown = .01f;
+
+    float timeToNextKeyRotate;
+
+    [Range(.02f, 1f)]
+    public float keyRepeatRateRotate = .25f;
 
     private void Start()
     {
-        timeToNextKey = Time.time;
+        timeToNextKeyLeftRight = Time.time + keyRepeatRateLeftRight;
+        timeToNextKeyDown = Time.time + keyRepeatRateDown;
+        timeToNextKeyRotate = Time.time + keyRepeatRateRotate;
 
         gameBoard = GameObject.FindFirstObjectByType<Board>();
         spawner = GameObject.FindFirstObjectByType<Spawner>();
-
-        if (spawner)
-        {
-            if (activeShape == null)
-            {
-                activeShape = spawner.SpawnShape();
-            }
-
-            spawner.transform.position = Vectorf.Round(spawner.transform.position);
-        }
 
         if (!gameBoard)
         {
@@ -39,49 +48,81 @@ public class GameController : MonoBehaviour
         {
             Debug.LogWarning("WARNING! There is no spawner defined!");
         }
+        else
+        {
+            spawner.transform.position = Vectorf.Round(spawner.transform.position);
+            if (!activeShape)
+            {
+                activeShape = spawner.SpawnShape();
+            }
+        }
     }
 
     void PlayerInput()
     {
-        if ((Input.GetButtonDown("MoveRight")) && (Time.time > timeToNextKey) || (Input.GetButtonDown("MoveRight")))
+        if ((Input.GetButton("MoveRight")) && (Time.time > timeToNextKeyLeftRight) || (Input.GetButtonDown("MoveRight")))
         {
             activeShape.MoveRight();
-            timeToNextKey = Time.time + keyRepeatRate;
+            timeToNextKeyLeftRight = Time.time + keyRepeatRateLeftRight;
 
-            if (gameBoard.IsValidPosition(activeShape))
-            {
-                Debug.Log("Move right");
-            }
-            else
+            if (!gameBoard.IsValidPosition(activeShape))
             {
                 activeShape.MoveLeft();
-                Debug.Log("Hit the right boundary");
             }
         }
 
-        if (Time.time > timeToDrop)
+        else if ((Input.GetButton("MoveLeft")) && (Time.time > timeToNextKeyLeftRight) || (Input.GetButtonDown("MoveLeft")))
+        {
+            activeShape.MoveLeft();
+            timeToNextKeyLeftRight = Time.time + keyRepeatRateLeftRight;
+
+            if (!gameBoard.IsValidPosition(activeShape))
+            {
+                activeShape.MoveRight();
+            }
+        }
+
+        else if ((Input.GetButtonDown("Rotate")) && (Time.time > timeToNextKeyRotate))
+        {
+            activeShape.RotateRight();
+            timeToNextKeyRotate = Time.time + keyRepeatRateRotate;
+
+            if (!gameBoard.IsValidPosition(activeShape))
+            {
+                activeShape.RotateLeft();
+            }
+        }
+        else if (Input.GetButton("MoveDown") && (Time.time > timeToNextKeyDown) || Time.time > timeToDrop)
         {
             timeToDrop = Time.time + dropInterval;
-            if (activeShape)
+            timeToNextKeyDown = Time.time + keyRepeatRateDown;
+            activeShape.MoveDown();
+
+            if (!gameBoard.IsValidPosition(activeShape))
             {
-                activeShape.MoveDown();
-
-                if (!gameBoard.IsValidPosition(activeShape))
-                {
-                    activeShape.MoveUp();
-                    gameBoard.StoreShapeInGrid(activeShape);
-
-                    if (spawner)
-                    {
-                        activeShape = spawner.SpawnShape();
-                    }
-                }
+                LandShape();
             }
         }
     }
 
+    private void LandShape()
+    {
+        timeToNextKeyLeftRight = Time.time;
+        timeToNextKeyDown = Time.time;
+        timeToNextKeyRotate = Time.time;
+
+        activeShape.MoveUp();
+        gameBoard.StoreShapeInGrid(activeShape);
+        activeShape = spawner.SpawnShape();
+    }
+
     private void Update()
     {
+        if (!gameBoard || !spawner || !activeShape)
+        {
+            return;
+        }
+
         PlayerInput();
     }
 }
