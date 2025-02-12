@@ -12,6 +12,11 @@ public class GameController : MonoBehaviour
         gameBoard = GameObject.FindFirstObjectByType<Board>();
         spawner = GameObject.FindFirstObjectByType<Spawner>();
 
+        if (spawner)
+        {
+            spawner.transform.position = Vectorf.Round(spawner.transform.position);
+        }
+
         if (!gameBoard)
         {
             Debug.LogWarning("WARNING! There is no game board defined!");
