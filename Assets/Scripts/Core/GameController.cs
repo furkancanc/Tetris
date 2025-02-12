@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class GameController : MonoBehaviour
 
     [Range(.02f, 1f)]
     public float keyRepeatRateRotate = .25f;
+
+    bool gameOver = false;
+
+    public GameObject gameOverPanel;
 
     private void Start()
     {
@@ -100,7 +105,14 @@ public class GameController : MonoBehaviour
 
             if (!gameBoard.IsValidPosition(activeShape))
             {
-                LandShape();
+                if (gameBoard.IsOverLimit(activeShape))
+                {
+                    GameOver();
+                }
+                else
+                {
+                    LandShape();
+                }
             }
         }
     }
@@ -118,13 +130,31 @@ public class GameController : MonoBehaviour
         gameBoard.ClearAllRows();
     }
 
+    public void GameOver()
+    {
+        activeShape.MoveUp();
+        gameOver = true;
+        Debug.LogWarning(activeShape.name + " is over the limit");
+
+        if (gameOverPanel)
+        {
+            gameOverPanel.SetActive(true);
+        }
+    }
+
     private void Update()
     {
-        if (!gameBoard || !spawner || !activeShape)
+        if (!gameBoard || !spawner || !activeShape || gameOver)
         {
             return;
         }
 
         PlayerInput();
+    }
+
+    public void Restart()
+    {
+        Debug.Log("Restarted");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
