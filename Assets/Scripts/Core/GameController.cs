@@ -7,6 +7,9 @@ public class GameController : MonoBehaviour
 
     Shape activeShape;
 
+    float dropInterval = .25f;
+    float timeToDrop;
+
     private void Start()
     {
         //gameBoard = GameObject.FindWithTag("Board").GetComponent<Board>();
@@ -42,10 +45,13 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        if (activeShape)
+        if (Time.time > timeToDrop)
         {
-            activeShape.MoveDown();
+            timeToDrop = Time.time + dropInterval;
+            if (activeShape)
+            {
+                activeShape.MoveDown();
+            }
         }
     }
-
 }
