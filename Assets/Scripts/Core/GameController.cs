@@ -41,9 +41,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void Update()
+    void PlayerInput()
     {
-        if (Input.GetButtonDown("MoveRight") && Time.time > timeToNextKey)
+        if ((Input.GetButtonDown("MoveRight")) && (Time.time > timeToNextKey) || (Input.GetButtonDown("MoveRight")))
         {
             activeShape.MoveRight();
             timeToNextKey = Time.time + keyRepeatRate;
@@ -78,5 +78,10 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Update()
+    {
+        PlayerInput();
     }
 }
