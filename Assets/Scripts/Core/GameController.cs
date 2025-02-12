@@ -5,6 +5,8 @@ public class GameController : MonoBehaviour
     Board gameBoard;
     Spawner spawner;
 
+    Shape activeShape;
+
     private void Start()
     {
         //gameBoard = GameObject.FindWithTag("Board").GetComponent<Board>();
@@ -14,6 +16,11 @@ public class GameController : MonoBehaviour
 
         if (spawner)
         {
+            if (activeShape == null)
+            {
+                activeShape = spawner.SpawnShape();
+            }
+
             spawner.transform.position = Vectorf.Round(spawner.transform.position);
         }
 
@@ -25,6 +32,19 @@ public class GameController : MonoBehaviour
         if (!spawner)
         {
             Debug.LogWarning("WARNING! There is no spawner defined!");
+        }
+    }
+
+    private void Update()
+    {
+        if (!gameBoard || !spawner)
+        {
+            return;
+        }
+
+        if (activeShape)
+        {
+            activeShape.MoveDown();
         }
     }
 
