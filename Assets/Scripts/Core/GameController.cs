@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 
     Shape activeShape;
 
-    float dropInterval = .9f;
+    float dropInterval = .3f;
     float timeToDrop;
 
     float timeToNextKey;
@@ -114,6 +114,8 @@ public class GameController : MonoBehaviour
         activeShape.MoveUp();
         gameBoard.StoreShapeInGrid(activeShape);
         activeShape = spawner.SpawnShape();
+
+        gameBoard.ClearAllRows();
     }
 
     private void Update()
