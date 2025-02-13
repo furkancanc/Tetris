@@ -40,6 +40,9 @@ public class GameController : MonoBehaviour
     public IconToggle rotIconToggle;
     bool clockwise = true;
 
+    public GameObject pausePanel;
+    public bool isPaused = false;
+
     private void Start()
     {
         timeToNextKeyLeftRight = Time.time + keyRepeatRateLeftRight;
@@ -76,6 +79,11 @@ public class GameController : MonoBehaviour
         if (gameOverPanel)
         {
             gameOverPanel.SetActive(false);
+        }
+
+        if (pausePanel)
+        {
+            pausePanel.SetActive(false);
         }
     }
 
@@ -147,6 +155,11 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+
+        else if (Input.GetButtonDown("Pause"))
+        {
+            TogglePause();
+        }
     }
 
     private void LandShape()
@@ -202,7 +215,7 @@ public class GameController : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("Restarted");
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -221,5 +234,28 @@ public class GameController : MonoBehaviour
         {
             rotIconToggle.ToggleIcon(clockwise);
         }
+    }
+
+    public void TogglePause()
+    {
+        if (gameOver)
+        {
+            return;
+        }
+
+        isPaused = !isPaused;
+
+        if (pausePanel)
+        {
+            pausePanel.SetActive(isPaused);
+
+            if (soundManager)
+            {
+                soundManager.musicSource.volume = (isPaused) ? soundManager.musicVolume * .25f : soundManager.musicVolume;
+            }
+
+            Time.timeScale = isPaused ? 0 : 1f;
+        }
+
     }
 }
