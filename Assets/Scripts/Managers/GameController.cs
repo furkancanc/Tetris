@@ -161,6 +161,12 @@ public class GameController : MonoBehaviour
 
         if (gameBoard.completedRows > 0)
         {
+            if (gameBoard.completedRows > 1)
+            {
+                AudioClip randomVocal = soundManager.GetRandomClip(soundManager.vocalClips);
+                PlaySound(randomVocal);
+            }
+
             PlaySound(soundManager.clearRowSound);
         }
     }
@@ -177,6 +183,7 @@ public class GameController : MonoBehaviour
         }
 
         PlaySound(soundManager.gameOverSound, .75f);
+        PlaySound(soundManager.gameOverVocalClip);
     }
 
     private void Update()

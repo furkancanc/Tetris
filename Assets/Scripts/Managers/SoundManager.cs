@@ -23,6 +23,8 @@ public class SoundManager : MonoBehaviour
 
     AudioClip randomMusicClip;
 
+    public AudioClip[] vocalClips;
+    public AudioClip gameOverVocalClip;
     private void Start()
     {
         randomMusicClip = GetRandomClip(musicClips);
