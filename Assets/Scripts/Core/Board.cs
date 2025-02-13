@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-   
-
     public Transform emptySprite;
     public int height = 30;
     public int width = 10;
     public int header = 8;
 
     Transform[,] grid;
+
+    public int completedRows = 0;
 
     private void Awake()
     {
@@ -140,10 +140,14 @@ public class Board : MonoBehaviour
 
     public void ClearAllRows()
     {
+        completedRows = 0;
+
         for (int y = 0; y < height; ++y)
         {
             if (IsComplete(y))
             {
+                ++completedRows;
+
                 ClearRow(y);
                 ShiftRowsDown(y);
                 --y;

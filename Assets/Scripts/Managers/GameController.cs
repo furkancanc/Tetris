@@ -151,13 +151,18 @@ public class GameController : MonoBehaviour
         timeToNextKeyDown = Time.time;
         timeToNextKeyRotate = Time.time;
 
-        PlaySound(soundManager.dropSound, .75f);
-
         activeShape.MoveUp();
         gameBoard.StoreShapeInGrid(activeShape);
         activeShape = spawner.SpawnShape();
 
         gameBoard.ClearAllRows();
+
+        PlaySound(soundManager.dropSound);
+
+        if (gameBoard.completedRows > 0)
+        {
+            PlaySound(soundManager.clearRowSound);
+        }
     }
 
     public void GameOver()
