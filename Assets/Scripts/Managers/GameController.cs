@@ -35,6 +35,8 @@ public class GameController : MonoBehaviour
 
     public GameObject gameOverPanel;
 
+    SoundManager soundManager;
+
     private void Start()
     {
         timeToNextKeyLeftRight = Time.time + keyRepeatRateLeftRight;
@@ -43,10 +45,16 @@ public class GameController : MonoBehaviour
 
         gameBoard = GameObject.FindFirstObjectByType<Board>();
         spawner = GameObject.FindFirstObjectByType<Spawner>();
+        soundManager = GameObject.FindFirstObjectByType<SoundManager>();
 
         if (!gameBoard)
         {
             Debug.LogWarning("WARNING! There is no game board defined!");
+        }
+
+        if (!soundManager)
+        {
+            Debug.LogWarning("WARNING! There is no sound manager defined!");
         }
 
         if (!spawner)
@@ -60,6 +68,11 @@ public class GameController : MonoBehaviour
             {
                 activeShape = spawner.SpawnShape();
             }
+        }
+
+        if (gameOverPanel)
+        {
+            gameOverPanel.SetActive(false);
         }
     }
 
@@ -128,6 +141,11 @@ public class GameController : MonoBehaviour
         activeShape = spawner.SpawnShape();
 
         gameBoard.ClearAllRows();
+
+        if (soundManager.fxEnabled && soundManager.dropSound)
+        {
+            AudioSource.PlayClipAtPoint(soundManager.dropSound, Camera.main.transform.position, soundManager.fxVolume);
+        }
     }
 
     public void GameOver()

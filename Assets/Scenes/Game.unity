@@ -2224,7 +2224,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 339390419705005512, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8751039331424870711, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2065912714}
   m_SourcePrefab: {fileID: 100100000, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
 --- !u!224 &1465638817 stripped
 RectTransform:
@@ -2832,14 +2835,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf34d048af73d94bb55dc62292eed34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicEnabled: 1
+  musicEnabled: 0
   fxEnabled: 1
   musicVolume: 1
   fxVolume: 1
-  clearRowSound: {fileID: 0}
-  moveSound: {fileID: 0}
-  dropSound: {fileID: 0}
-  gameOverSound: {fileID: 0}
+  clearRowSound: {fileID: 8300000, guid: 5e573cc7e2cd44522a9dbd65bd61eb95, type: 3}
+  moveSound: {fileID: 8300000, guid: 232745a37421848f0b6ba281e2775fd1, type: 3}
+  dropSound: {fileID: 8300000, guid: 2912ce0f9e2544ed7947ea6ba42a1347, type: 3}
+  gameOverSound: {fileID: 8300000, guid: fed0a0232ce1b40a882a18aa3a249a22, type: 3}
   musicSource: {fileID: 924700146}
   musicClips:
   - {fileID: 8300000, guid: 8e6afcfcba29249349c399c7826ebf58, type: 3}
@@ -3391,6 +3394,67 @@ MonoBehaviour:
       - m_Target: {fileID: 1774419059}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: ToggleMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &2065912712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8751039331424870711, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
+  m_PrefabInstance: {fileID: 1465638816}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2065912714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065912712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1774419059}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: ToggleFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
