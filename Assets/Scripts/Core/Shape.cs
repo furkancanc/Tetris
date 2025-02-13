@@ -44,14 +44,16 @@ public class Shape : MonoBehaviour
             transform.Rotate(0, 0, 90);
         }
     }
-
-    void Start()
+    
+    public void RotateClockwise(bool clockwise)
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (clockwise)
+        {
+            RotateRight();
+        }
+        else
+        {
+            RotateLeft();
+        }
     }
 }

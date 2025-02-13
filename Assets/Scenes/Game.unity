@@ -194,6 +194,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60498926}
   m_CullTransparentMesh: 1
+--- !u!1 &160424045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2983775334592230257, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
+  m_PrefabInstance: {fileID: 1741892814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &160424049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160424045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7adf772b0aac14d9e44e200a640aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconTrue: {fileID: 21300000, guid: 1c3478c459f1847448e5bb51f3ea0406, type: 3}
+  iconFalse: {fileID: 21300000, guid: 373ef675e8f1e5a4e9ef8fd467a87b6b, type: 3}
+  defaultIconState: 1
 --- !u!1 &300438709
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,6 +953,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709162118}
   m_CullTransparentMesh: 1
+--- !u!1 &741940623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8751039331424870711, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
+  m_PrefabInstance: {fileID: 1741892814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &764001605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,6 +1281,7 @@ MonoBehaviour:
   keyRepeatRateDown: 0.01
   keyRepeatRateRotate: 0.25
   gameOverPanel: {fileID: 1092661005}
+  rotIconToggle: {fileID: 160424049}
 --- !u!4 &881678193
 Transform:
   m_ObjectHideFlags: 0
@@ -2749,13 +2775,75 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 339390419705005512, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8751039331424870711, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1741892817}
+    - targetCorrespondingSourceObject: {fileID: 2983775334592230257, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 160424049}
   m_SourcePrefab: {fileID: 100100000, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
 --- !u!224 &1741892815 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3903526376885585442, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
   m_PrefabInstance: {fileID: 1741892814}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1741892817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741940623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 881678192}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: ToggleRotDirection
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1774290767
 GameObject:
   m_ObjectHideFlags: 0
