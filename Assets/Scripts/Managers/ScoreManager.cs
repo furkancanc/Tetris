@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -7,6 +9,11 @@ public class ScoreManager : MonoBehaviour
     int level = 1;
 
     public int linesPerLevel = 5;
+
+    public TextMeshProUGUI linesText;
+    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI scoreText;
+
 
     const int minLines = 1;
     const int maxLines = 4;
@@ -30,6 +37,8 @@ public class ScoreManager : MonoBehaviour
                 score += 1200 * level;
                 break;
         }
+
+        UpdateUIText();
     }
 
     public void Reset()
@@ -41,5 +50,35 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         Reset();
+    }
+
+    void UpdateUIText()
+    {
+        if (linesText)
+        {
+            linesText.text = lines.ToString();
+        }
+
+        if (levelText)
+        {
+            levelText.text = level.ToString();
+        }
+
+        if (scoreText)
+        {
+            scoreText.text = PadZero(score, 5);
+        }
+    }
+
+    string PadZero(int n, int padDigits)
+    {
+        string nStr = n.ToString();
+
+        while (nStr.Length < padDigits)
+        {
+            nStr = "0" + nStr;
+        }
+
+        return nStr;
     }
 }

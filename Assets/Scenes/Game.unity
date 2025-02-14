@@ -3777,6 +3777,17 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1602461108 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5063978041898360532, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
+  m_PrefabInstance: {fileID: 7579086044315635076}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1620283108
 GameObject:
   m_ObjectHideFlags: 0
@@ -3852,6 +3863,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620283108}
   m_CullTransparentMesh: 1
+--- !u!114 &1666190417 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5063978041898360532, guid: 4042508ad828e0c429e767ffd62b762c, type: 3}
+  m_PrefabInstance: {fileID: 889700965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1712817967
 GameObject:
   m_ObjectHideFlags: 0
@@ -4283,6 +4305,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linesPerLevel: 5
+  linesText: {fileID: 1602461108}
+  levelText: {fileID: 1666190417}
+  scoreText: {fileID: 1351620114}
 --- !u!1 &1774290767
 GameObject:
   m_ObjectHideFlags: 0
