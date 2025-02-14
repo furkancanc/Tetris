@@ -4,6 +4,9 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public Shape[] allShapes;
+    public Transform[] queuedXForms = new Transform[3];
+
+    Shape[] queuedShapes = new Shape[3];
 
     Shape GetRandomShape()
     {
@@ -34,5 +37,32 @@ public class Spawner : MonoBehaviour
             return null;
         }
 
+    }
+
+    void InitQueue()
+    {
+        for (int i = 0; i < queuedShapes.Length; ++i)
+        {
+            queuedShapes[i] = null;
+        }
+
+        FillQueue();
+    }
+
+    void FillQueue()
+    {
+        for (int i = 0; i < queuedShapes.Length; ++i)
+        {
+            if (!queuedShapes[i])
+            {
+                queuedShapes[i] = Instantiate(GetRandomShape(), transform.position, Quaternion.identity) as Shape;
+                queuedShapes[i].transform.position = queuedXForms[i].position;
+            }
+        }
+    }
+
+    private void Awake()
+    {
+        InitQueue();
     }
 }
