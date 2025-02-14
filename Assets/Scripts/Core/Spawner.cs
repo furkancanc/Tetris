@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     public Transform[] queuedXForms = new Transform[3];
 
     Shape[] queuedShapes = new Shape[3];
-
+    float queueScale = .5f;
     Shape GetRandomShape()
     {
         int randomIndex = Random.Range(0, allShapes.Length);
@@ -25,7 +25,10 @@ public class Spawner : MonoBehaviour
 
     public Shape SpawnShape()
     {
-        Shape shape = Instantiate(GetRandomShape(), transform.position, Quaternion.identity);
+        //Shape shape = Instantiate(GetRandomShape(), transform.position, Quaternion.identity);
+        Shape shape = GetQueuedShape();
+        shape.transform.position = transform.position;
+        shape.transform.localScale = Vector3.one;
 
         if (shape)
         {
@@ -56,7 +59,8 @@ public class Spawner : MonoBehaviour
             if (!queuedShapes[i])
             {
                 queuedShapes[i] = Instantiate(GetRandomShape(), transform.position, Quaternion.identity) as Shape;
-                queuedShapes[i].transform.position = queuedXForms[i].position;
+                queuedShapes[i].transform.position = queuedXForms[i].position + queuedShapes[i].queueOffset;
+                queuedShapes[i].transform.localScale = new Vector3(queueScale, queueScale, queueScale);
             }
         }
     }
@@ -64,5 +68,27 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         InitQueue();
+    }
+
+    Shape GetQueuedShape()
+    {
+        Shape firstShape = null;
+
+        if (queuedShapes[0])
+        {
+            firstShape = queuedShapes[0];
+        }
+
+        for (int i = 1; i < queuedShapes.Length; ++i)
+        {
+            queuedShapes[i - 1] = queuedShapes[i];
+            queuedShapes[i - 1].transform.position = queuedXForms[i - 1].position + queuedShapes[i].queueOffset;
+        }
+
+        queuedShapes[queuedShapes.Length - 1] = null;
+
+        FillQueue();
+
+        return firstShape;
     }
 }
