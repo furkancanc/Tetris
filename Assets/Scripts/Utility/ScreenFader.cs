@@ -31,6 +31,15 @@ public class ScreenFader : MonoBehaviour
 
     IEnumerator FadeRoutine()
     {
+        yield return new WaitForSeconds(delay);
 
+        while (Mathf.Abs(targetAlpha - currentAlpha) > .01f)
+        {
+            yield return new WaitForEndOfFrame();
+
+            currentAlpha = currentAlpha + inc;
+            Color tempColor = new Color(originalColor.r, originalColor.g, originalColor.b, currentAlpha);
+            graphic.color = tempColor;
+        }
     }
 }
