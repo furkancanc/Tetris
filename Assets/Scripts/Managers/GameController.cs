@@ -47,6 +47,8 @@ public class GameController : MonoBehaviour
 
     ScoreManager scoreManager;
 
+    Ghost ghost;
+
     private void Start()
     {
         timeToNextKeyLeftRight = Time.time + keyRepeatRateLeftRight;
@@ -57,6 +59,7 @@ public class GameController : MonoBehaviour
         spawner = GameObject.FindFirstObjectByType<Spawner>();
         soundManager = GameObject.FindFirstObjectByType<SoundManager>();
         scoreManager = GameObject.FindFirstObjectByType<ScoreManager>();
+        ghost = GameObject.FindFirstObjectByType<Ghost>();
 
         if (!gameBoard)
         {
@@ -184,6 +187,11 @@ public class GameController : MonoBehaviour
         gameBoard.StoreShapeInGrid(activeShape);
         activeShape = spawner.SpawnShape();
 
+        if (ghost)
+        {
+            ghost.Reset();
+        }
+
         gameBoard.ClearAllRows();
 
         PlaySound(soundManager.dropSound);
@@ -233,6 +241,14 @@ public class GameController : MonoBehaviour
         }
 
         PlayerInput();
+    }
+
+    private void LateUpdate()
+    {
+        if (ghost)
+        {
+            ghost.DrawGhost(activeShape, gameBoard);
+        }
     }
 
     public void Restart()
