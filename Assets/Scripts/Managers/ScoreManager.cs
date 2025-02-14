@@ -6,7 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     int score = 0;
     int lines;
-    int level = 1;
+    public int level = 1;
 
     public int linesPerLevel = 5;
 
@@ -14,14 +14,16 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI scoreText;
 
+    public bool didLevelUp = false;
 
     const int minLines = 1;
     const int maxLines = 4;
 
     public void ScoreLines(int n)
     {
-        n = Mathf.Clamp(n, minLines, maxLines);
+        didLevelUp = false;
 
+        n = Mathf.Clamp(n, minLines, maxLines);
         switch(n)
         {
             case 1:
@@ -36,6 +38,12 @@ public class ScoreManager : MonoBehaviour
             case 4:
                 score += 1200 * level;
                 break;
+        }
+        lines -= n;
+
+        if (lines <= 0)
+        {
+            LevelUp();
         }
 
         UpdateUIText();
@@ -80,5 +88,12 @@ public class ScoreManager : MonoBehaviour
         }
 
         return nStr;
+    }
+
+    public void LevelUp()
+    {
+        ++level;
+        lines = linesPerLevel * level;
+        didLevelUp = true;
     }
 }

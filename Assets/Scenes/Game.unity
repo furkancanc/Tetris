@@ -2016,6 +2016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4223d002054334f809212e8d8121d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropInterval: 0.3
   keyRepeatRateLeftRight: 0.15
   keyRepeatRateDown: 0.01
   keyRepeatRateRotate: 0.25
@@ -4304,10 +4305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2bceb89d8603884f868b6736c343517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
   linesPerLevel: 5
   linesText: {fileID: 1602461108}
   levelText: {fileID: 1666190417}
   scoreText: {fileID: 1351620114}
+  didLevelUp: 0
 --- !u!1 &1774290767
 GameObject:
   m_ObjectHideFlags: 0
@@ -4451,6 +4454,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e753dc3dea92f4b1c81255878103653f, type: 3}
   - {fileID: 8300000, guid: 8b9eee15a25ac4457bc8de1db8deed46, type: 3}
   gameOverVocalClip: {fileID: 8300000, guid: dde698f7e18ad439d93644afcb0de99b, type: 3}
+  levelUpVocalClip: {fileID: 8300000, guid: 2c74626c1fb694ae6babfb9e4b3cf48e, type: 3}
   musicIconToggle: {fileID: 630027161}
   fxIconToggle: {fileID: 1335520372}
 --- !u!1 &1781284653 stripped
