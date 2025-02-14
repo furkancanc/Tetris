@@ -49,6 +49,8 @@ public class GameController : MonoBehaviour
 
     Ghost ghost;
 
+    Holder holder;
+
     private void Start()
     {
         timeToNextKeyLeftRight = Time.time + keyRepeatRateLeftRight;
@@ -60,6 +62,7 @@ public class GameController : MonoBehaviour
         soundManager = GameObject.FindFirstObjectByType<SoundManager>();
         scoreManager = GameObject.FindFirstObjectByType<ScoreManager>();
         ghost = GameObject.FindFirstObjectByType<Ghost>();
+        holder = GameObject.FindFirstObjectByType<Holder>();
 
         if (!gameBoard)
         {
@@ -294,6 +297,24 @@ public class GameController : MonoBehaviour
 
             Time.timeScale = isPaused ? 0 : 1f;
         }
+    }
 
+    public void Hold()
+    {
+        if (!holder)
+        {
+            return;
+        }
+
+        if (!holder.heldShape)
+        {
+            holder.Catch(activeShape);
+            activeShape = spawner.SpawnShape();
+        }
+
+        if (ghost)
+        {
+            ghost.Reset();
+        }
     }
 }
