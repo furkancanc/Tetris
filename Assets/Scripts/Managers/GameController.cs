@@ -195,6 +195,11 @@ public class GameController : MonoBehaviour
             ghost.Reset();
         }
 
+        if (holder)
+        {
+            holder.canRelease = true;
+        }
+
         gameBoard.ClearAllRows();
 
         PlaySound(soundManager.dropSound);
@@ -311,7 +316,17 @@ public class GameController : MonoBehaviour
             holder.Catch(activeShape);
             activeShape = spawner.SpawnShape();
         }
-
+        else if (holder.canRelease)
+        {
+            Shape shape = activeShape;
+            activeShape = holder.Release();
+            activeShape.transform.position = spawner.transform.position;
+            holder.Catch(shape);
+        }
+        else
+        {
+            Debug.LogWarning("HOLDER WARNING! Wait for cool down!");
+        }
         if (ghost)
         {
             ghost.Reset();
