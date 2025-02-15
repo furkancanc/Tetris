@@ -315,6 +315,7 @@ public class GameController : MonoBehaviour
         {
             holder.Catch(activeShape);
             activeShape = spawner.SpawnShape();
+            PlaySound(soundManager.holdSound);
         }
         else if (holder.canRelease)
         {
@@ -322,10 +323,12 @@ public class GameController : MonoBehaviour
             activeShape = holder.Release();
             activeShape.transform.position = spawner.transform.position;
             holder.Catch(shape);
+            PlaySound(soundManager.holdSound);
         }
         else
         {
             Debug.LogWarning("HOLDER WARNING! Wait for cool down!");
+            PlaySound(soundManager.errorSound);
         }
         if (ghost)
         {
