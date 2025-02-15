@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8d6d72da03b35d74abf9c587c5f036a0
+guid: 17026791e82efba4d891f072f60fb6f9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 219891143617112326
-    second: StreakJagged1x4_0
+      213: -6835238427370642700
+    second: Sparkles1x4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,12 +126,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: StreakJagged1x4_0
+      name: Sparkles1x4_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
+        width: 128
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6096d8084d53d0300800000000000000
-      internalID: 219891143617112326
+      spriteID: 4f2297d6dda5421a0800000000000000
+      internalID: -6835238427370642700
       vertices: []
       indices: 
       edges: []
