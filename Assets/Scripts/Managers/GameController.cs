@@ -186,13 +186,19 @@ public class GameController : MonoBehaviour
 
     private void LandShape()
     {
+        if (!activeShape)
+            return;
+
         timeToNextKeyLeftRight = Time.time;
         timeToNextKeyDown = Time.time;
         timeToNextKeyRotate = Time.time;
 
         activeShape.MoveUp();
         gameBoard.StoreShapeInGrid(activeShape);
+        activeShape.LandShapeFx();
+
         activeShape = spawner.SpawnShape();
+
 
         if (ghost)
         {
