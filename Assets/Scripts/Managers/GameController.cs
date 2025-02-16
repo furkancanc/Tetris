@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -50,6 +51,8 @@ public class GameController : MonoBehaviour
     Ghost ghost;
 
     Holder holder;
+
+    public ParticlePlayer gameOverFx;
 
     private void Start()
     {
@@ -239,16 +242,27 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         activeShape.MoveUp();
+
+        StartCoroutine(GameOverRoutine());
+       
+        PlaySound(soundManager.gameOverSound, .75f);
+        PlaySound(soundManager.gameOverVocalClip);
         gameOver = true;
-        Debug.LogWarning(activeShape.name + " is over the limit");
+    }
+
+    IEnumerator GameOverRoutine()
+    {
+        if (gameOverFx)
+        {
+            gameOverFx.Play();
+        }
+
+        yield return new WaitForSeconds(0.3f);
 
         if (gameOverPanel)
         {
             gameOverPanel.SetActive(true);
         }
-
-        PlaySound(soundManager.gameOverSound, .75f);
-        PlaySound(soundManager.gameOverVocalClip);
     }
 
     private void Update()
