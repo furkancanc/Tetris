@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -11,7 +12,7 @@ public class Board : MonoBehaviour
 
     public int completedRows = 0;
 
-    public ParticlePlayer rowGlowFx;
+    public ParticlePlayer[] rowGlowFx = new ParticlePlayer[4];
     private void Awake()
     {
         grid = new Transform[width, height];
@@ -139,7 +140,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void ClearAllRows()
+    public IEnumerator ClearAllRows()
     {
         completedRows = 0;
 
@@ -147,12 +148,20 @@ public class Board : MonoBehaviour
         {
             if (IsComplete(y))
             {
+                ClearRowFX(completedRows, y);
                 ++completedRows;
+            }
+        }
 
+        yield return new WaitForSeconds(0.5f);
+
+        for (int y = 0; y < height; ++y)
+        {
+            if (IsComplete(y))
+            {
                 ClearRow(y);
-                ClearRowFX(y);
-
                 ShiftRowsDown(y + 1);
+                yield return new WaitForSeconds(0.3f);
                 --y;
             }
         }
@@ -171,12 +180,12 @@ public class Board : MonoBehaviour
         return false;
     }
 
-    void ClearRowFX(int y)
+    void ClearRowFX(int idx, int y)
     {
-        if (rowGlowFx)
+        if (rowGlowFx[idx])
         {
-            rowGlowFx.transform.position = new Vector3(0, y, -2f);
-            rowGlowFx.Play();
+            rowGlowFx[idx].transform.position = new Vector3(0, y, -2f);
+            rowGlowFx[idx].Play();
         }
     }
 }

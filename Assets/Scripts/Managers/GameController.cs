@@ -204,7 +204,7 @@ public class GameController : MonoBehaviour
             holder.canRelease = true;
         }
 
-        gameBoard.ClearAllRows();
+        gameBoard.StartCoroutine("ClearAllRows");
 
         PlaySound(soundManager.dropSound);
 
