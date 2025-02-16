@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 using Random = UnityEngine.Random;
@@ -8,6 +9,8 @@ public class Spawner : MonoBehaviour
 
     Shape[] queuedShapes = new Shape[3];
     float queueScale = .5f;
+
+    public ParticleSystem spawnFx;
     Shape GetRandomShape()
     {
         int randomIndex = Random.Range(0, allShapes.Length);
@@ -28,7 +31,14 @@ public class Spawner : MonoBehaviour
         //Shape shape = Instantiate(GetRandomShape(), transform.position, Quaternion.identity);
         Shape shape = GetQueuedShape();
         shape.transform.position = transform.position;
-        shape.transform.localScale = Vector3.one;
+        //shape.transform.localScale = Vector3.one;
+
+        StartCoroutine(GrowShape(shape, transform.position, .25f));
+
+        if (spawnFx)
+        {
+            spawnFx.Play();
+        }
 
         if (shape)
         {
@@ -90,5 +100,22 @@ public class Spawner : MonoBehaviour
         FillQueue();
 
         return firstShape;
+    }
+
+    IEnumerator GrowShape(Shape shape, Vector3 position, float growTime = .5f)
+    {
+        float size = 0f;
+        growTime = Mathf.Clamp(growTime, 0.1f, 2f);
+        float sizeDelta = Time.deltaTime / growTime;
+
+        while (size < 1f)
+        {
+            shape.transform.localScale = new Vector3(size, size, size);
+            size += sizeDelta;
+            shape.transform.position = position;
+            yield return null;
+        }
+
+        shape.transform.localScale = Vector3.one;
     }
 }
